@@ -2,6 +2,7 @@ import Fastify from "fastify"
 import { prisma } from "./prisma"
 import {Boolean} from "./generated/prisma/internal/prismaNamespace";
 import {User} from "./generated/prisma/client";
+import {errorHandler} from "./plugins/errorHandler";
 
 const app = Fastify({ logger: true })
 
@@ -84,3 +85,5 @@ app.post("/posts", async (request, res) => {
 app.listen({ port: 3000 }, () => {
     console.log("Server running on http://localhost:3000")
 })
+
+app.register(errorHandler)
